@@ -1,4 +1,4 @@
-const queryConstants = {
+const userAuthenticationQueryStatements = {
   REGISTER_NEW_USER:
     "INSERT INTO users(username, password, created_on) VALUES($1, $2, $3)",
   AUTHENTICATE_USER:
@@ -7,4 +7,4 @@ const queryConstants = {
     "INSERT INTO users(username, password, created_on) VALUES($1, $2, $3)"
 };
 
-module.exports = queryConstants;
+module.exports = userAuthenticationQueryStatements;

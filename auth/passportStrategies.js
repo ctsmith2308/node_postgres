@@ -1,13 +1,6 @@
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 
-const { submitQuery } = require("../db");
-const queryConstants = require("../db/queries/constants");
-
-let constants = {
-  REGISTER_NEW_USER: "REGISTER_NEW_USER"
-};
-
 passport.use(
   "signup",
   new localStrategy(
@@ -32,14 +25,3 @@ passport.use(
     }
   )
 );
-
-let userAuthQueryFactory = (queryName, ...args) => {
-  let queryList = {
-    REGISTER_NEW_USER: {
-      text: queryConstants[queryName],
-      values: [...args, new Date(1944, 10, 13)],
-      rowMode: "array"
-    }
-  };
-  return queryList[queryName];
-};
