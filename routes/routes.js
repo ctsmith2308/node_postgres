@@ -1,20 +1,22 @@
 const express = require("express");
 const passport = require("passport");
-// const localStrategy = require("passport-local").Strategy;
-// const jwt = require("jsonwebtoken");
-const cors = require("cors");
-
 const router = express.Router();
+const { routeRequest } = require("../db");
 
-//When the user sends a post request to this route, passport authenticates the user based on the
-//middleware created previously
-router.post("/signup", passport.authenticate("signup"), (req, res, next) => {
-  console.log("here i am in the router!!!!");
-  res.json({
-    message: "Signup successful"
-    // user: req.user
-  });
-});
+let constants = {
+  REGISTER_NEW_USER: "REGISTER_NEW_USER"
+};
 
+router.post(
+  "/signup",
+  passport.authenticate("signup", { session: false }),
+  (req, res, next) => {
+    res.json({
+      message: "Signup successful"
+    });
+  }
+);
+
+router.post("/test", routeRequest(constants.REGISTER_NEW_USER));
 
 module.exports = router;
