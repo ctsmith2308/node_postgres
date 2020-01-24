@@ -1,7 +1,9 @@
+const userAuthenticationQueryStatements = require("../queryStatements/authQueryStatements");
+
 let authenticationQueryFactory = (queryName, ...args) => {
   let queryList = {
     REGISTER_NEW_USER: {
-      text: queryConstants[queryName],
+      text: userAuthenticationQueryStatements[queryName],
       values: [...args, new Date(1944, 10, 13)],
       rowMode: "array"
     }

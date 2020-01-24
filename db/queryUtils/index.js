@@ -1,3 +1,5 @@
+const acquirePoolConnection = require("../../db/config/poolConnection");
+
 const executeQuery = async query => {
   try {
     const client = await acquirePoolConnection();

@@ -3,7 +3,7 @@ const passport = require("passport");
 const router = express.Router();
 
 router.post(
-  "/signup",
+  "/test",
   passport.authenticate("signup", { session: false }),
   (req, res, next) => {
     res.json({
@@ -11,7 +11,5 @@ router.post(
     });
   }
 );
-
-// router.post('/what', requestHandler)
 
 module.exports = router;
