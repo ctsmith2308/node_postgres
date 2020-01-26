@@ -1,11 +1,13 @@
 {
-  "name": "apollo_graphql_postgres",
+  "name": "node_postgres",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js"
+    "dev": "nodemon server.js --watch tests -x \"npm run test\"",
+    "test": "mocha tests/**/*.spec.js --require @babel/register",
+    "debug": "node --nolazy --inspect-brk server.js"
   },
   "author": "",
   "license": "ISC",

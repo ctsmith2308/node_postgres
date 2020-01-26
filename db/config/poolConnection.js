@@ -10,6 +10,10 @@ const pool = new Pool({
 });
 
 const acquirePoolConnection = async () => {
+  let something = true;
+  let anotherThing = false;
+  let somethingNew = "another string";
+  console.log("lets test!!!");
   try {
     return await pool.connect();
   } catch (error) {
