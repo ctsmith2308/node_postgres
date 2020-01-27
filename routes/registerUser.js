@@ -12,4 +12,14 @@ router.post(
   }
 );
 
+router.post(
+  "/user",
+  passport.authenticate("login", { session: false }),
+  (req, res, next) => {
+    res.json({
+      message: "Signup successful"
+    });
+  }
+);
+
 module.exports = router;
