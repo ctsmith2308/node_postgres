@@ -6,6 +6,7 @@ router.post(
   "/test",
   passport.authenticate("signup", { session: false }),
   (req, res, next) => {
+    console.log(req.body);
     res.json({
       message: "Signup successful"
     });

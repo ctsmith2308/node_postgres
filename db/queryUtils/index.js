@@ -1,6 +1,7 @@
 const acquirePoolConnection = require("../../db/config/poolConnection");
 
 const executeQuery = async query => {
+  console.log("query", query);
   try {
     const client = await acquirePoolConnection();
     client.release();

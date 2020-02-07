@@ -13,16 +13,26 @@ const {
 
 const { executeQuery } = require("../db/queryUtils");
 
-const hashPassword = (password) => await new Promise((resolve, reject) => {
-    bcrypt.hash(password, process.env.SALT_ROUNDS, (err, hash) => {
-      if (err) reject(err);
-      resolve(hash);
-    });
-  })
+// const hashPassword = password =>
+//   new Promise((resolve, reject) => {
+//     bcrypt.hash(password, process.env.SALT_ROUNDS, (err, hash) => {
+//       if (err) reject(err);
+//       resolve(hash);
+//     });
+//   });
+
+const hashPassword = async password => {
+  let salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
+  return await bcrypt.hash(password, salt);
+};
 
 const authenticateSignup = async (email, password, done) => {
   try {
-    let query = buildQueryConfig(REGISTER_NEW_USER, email, hashPassword(password));
+    let query = buildQueryConfig(
+      REGISTER_NEW_USER,
+      email,
+      hashPassword(password)
+    );
     let newUser = await executeQuery(query);
     return done(null, newUser);
   } catch (error) {
