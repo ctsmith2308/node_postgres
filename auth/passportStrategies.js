@@ -1,30 +1,16 @@
-var bcrypt = require("bcryptjs");
 const passport = require("passport");
 const localStrategy = require("passport-local").Strategy;
 
+const { executeQuery } = require("../db/queryUtils");
+const { hashPassword } = require("../auth/passwordHelpers");
 const {
   REGISTER_NEW_USER,
   LOGIN_USER
 } = require("../db/queryUtils/queryConstants/userAuthConstants");
-
 const {
   buildQueryConfig
 } = require("../db/queryUtils/queryBuilders/queryBuilder");
 
-const { executeQuery } = require("../db/queryUtils");
-
-// const hashPassword = password =>
-//   new Promise((resolve, reject) => {
-//     bcrypt.hash(password, process.env.SALT_ROUNDS, (err, hash) => {
-//       if (err) reject(err);
-//       resolve(hash);
-//     });
-//   });
-
-const hashPassword = async password => {
-  let salt = await bcrypt.genSalt(Number(process.env.SALT_ROUNDS));
-  return await bcrypt.hash(password, salt);
-};
 
 const authenticateSignup = async (email, password, done) => {
   try {
